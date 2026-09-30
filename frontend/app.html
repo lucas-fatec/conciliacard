@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConciliaCard - Painel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topo">
+  <div class="marca">
+    <span class="marca-icone">&#9636;</span>
+    <h1>ConciliaCard</h1>
+  </div>
+  <div class="topo-direita">
+    <span id="nome-usuario"></span>
+    <button class="botao-texto" onclick="sair()">Sair</button>
+  </div>
+</header>
+
+<main class="conteudo">
+
+  <!-- ============ UC02 - Manter gastos ============ -->
+  <section class="painel">
+    <h2>1. Lancamentos de gastos</h2>
+    <p class="subtitulo">Cadastre aqui os gastos conforme voce os realiza.</p>
+
+    <div class="formulario">
+      <div class="campo">
+        <label for="descricao">Descricao</label>
+        <input type="text" id="descricao" placeholder="Ex.: Mercado Sao Jorge">
+      </div>
+      <div class="campo campo-curto">
+        <label for="valor">Valor (R$)</label>
+        <input type="number" id="valor" step="0.01" min="0.01" placeholder="0,00">
+      </div>
+      <div class="campo campo-curto">
+        <label for="data">Data</label>
+        <input type="date" id="data">
+      </div>
+      <div class="campo campo-curto">
+        <label for="categoria">Categoria</label>
+        <select id="categoria">
+          <option>Alimentacao</option>
+          <option>Transporte</option>
+          <option>Lazer</option>
+          <option>Saude</option>
+          <option>Educacao</option>
+          <option>Outros</option>
+        </select>
+      </div>
+      <div class="campo-acoes">
+        <button class="botao-principal" id="btn-salvar" onclick="salvarGasto()">Incluir</button>
+        <button class="botao-secundario" onclick="limparFormulario()">Limpar</button>
+      </div>
+    </div>
+
+    <table class="tabela">
+      <thead>
+        <tr>
+          <th>ID</th><th>Data</th><th>Descricao</th><th>Categoria</th>
+          <th class="direita">Valor</th><th class="centro">Acoes</th>
+        </tr>
+      </thead>
+      <tbody id="tabela-gastos"></tbody>
+      <tfoot>
+        <tr><td colspan="4"><strong>Total cadastrado</strong></td>
+            <td class="direita"><strong id="total-gastos">R$ 0,00</strong></td><td></td></tr>
+      </tfoot>
+    </table>
+  </section>
+
+  <!-- ============ UC03 - Importar extrato ============ -->
+  <section class="painel">
+    <h2>2. Importar extrato do cartao (PDF)</h2>
+    <p class="subtitulo">Envie o extrato em PDF. Somente arquivos PDF de ate 5 MB.</p>
+
+    <div class="formulario">
+      <div class="campo">
+        <label for="arquivo">Arquivo do extrato</label>
+        <input type="file" id="arquivo" accept="application/pdf">
+      </div>
+      <div class="campo-acoes">
+        <button class="botao-principal" onclick="importarExtrato()">Importar extrato</button>
+      </div>
+    </div>
+
+    <table class="tabela">
+      <thead>
+        <tr><th>ID</th><th>Arquivo</th><th>Referencia</th><th class="centro">Lancamentos</th>
+            <th class="direita">Total</th><th class="centro">Acao</th></tr>
+      </thead>
+      <tbody id="tabela-extratos"></tbody>
+    </table>
+  </section>
+
+  <!-- ============ UC04 - Conciliacao ============ -->
+  <section class="painel" id="painel-conciliacao">
+    <h2>3. Resultado da conciliacao</h2>
+    <p class="subtitulo" id="legenda-conciliacao">Selecione um extrato acima para conciliar.</p>
+
+    <div class="indicadores" id="indicadores"></div>
+    <table class="tabela">
+      <thead>
+        <tr><th>Situacao</th><th>Lancamento do extrato</th><th>Gasto cadastrado</th>
+            <th class="direita">Valor extrato</th><th class="direita">Valor sistema</th>
+            <th class="direita">Diferenca</th></tr>
+      </thead>
+      <tbody id="tabela-conciliacao"></tbody>
+    </table>
+  </section>
+
+</main>
+
+<div id="alerta" class="alerta oculto"></div>
+
+<script src="script.js"></script>
+<script>iniciarPainel();</script>
+</body>
+</html>

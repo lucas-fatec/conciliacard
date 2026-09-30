@@ -1,0 +1,60 @@
+# ============================================================
+# ConciliaCard - Orquestracao dos containers (Sprint #1)
+# Subir:  docker compose up -d
+# Parar:  docker compose down
+# ============================================================
+services:
+
+  db-conciliacard:
+    image: lucas5e/conciliacard-db:1.0
+    build: ./bd
+    image: conciliacard-db:1.0
+    container_name: db-conciliacard
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: conciliacard
+    ports:
+      - "3306:3306"
+    networks:
+      - conciliacard-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend-conciliacard:
+    image: lucas5e/conciliacard-backend:1.0
+    build: ./backend
+    image: conciliacard-backend:1.0
+    container_name: backend-conciliacard
+    depends_on:
+      db-conciliacard:
+        condition: service_healthy
+    environment:
+      DB_HOST: db-conciliacard
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: conciliacard
+      JWT_SECRET: conciliacard-sprint1-fatec
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    networks:
+      - conciliacard-network
+
+  frontend-conciliacard:
+    image: lucas5e/conciliacard-frontend:1.0
+    build: ./frontend
+    image: conciliacard-frontend:1.0
+    container_name: frontend-conciliacard
+    depends_on:
+      - backend-conciliacard
+    ports:
+      - "8080:80"
+    networks:
+      - conciliacard-network
+
+networks:
+  conciliacard-network:
+    driver: bridge

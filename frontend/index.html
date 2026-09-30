@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ConciliaCard - Acesso</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="tela-acesso">
+
+  <main class="cartao-acesso">
+    <header class="marca">
+      <span class="marca-icone">&#9636;</span>
+      <div>
+        <h1>ConciliaCard</h1>
+        <p>Conciliacao de extrato de cartao de credito</p>
+      </div>
+    </header>
+
+    <div class="abas">
+      <button id="aba-login" class="aba ativa" onclick="trocarAba('login')">Entrar</button>
+      <button id="aba-cadastro" class="aba" onclick="trocarAba('cadastro')">Criar conta</button>
+    </div>
+
+    <!-- UC01 - Login -->
+    <section id="form-login">
+      <label for="login-email">E-mail</label>
+      <input type="email" id="login-email" placeholder="usuario@fatec.sp.gov.br" autocomplete="username">
+
+      <label for="login-senha">Senha</label>
+      <input type="password" id="login-senha" placeholder="Sua senha" autocomplete="current-password">
+
+      <button class="botao-principal" onclick="entrar()">Entrar</button>
+      <p class="dica">Usuario de teste: <strong>usuario@fatec.sp.gov.br</strong> / <strong>Senha@2026</strong></p>
+    </section>
+
+    <!-- UC01 - Cadastro -->
+    <section id="form-cadastro" class="oculto">
+      <label for="cad-nome">Nome completo</label>
+      <input type="text" id="cad-nome" placeholder="Seu nome">
+
+      <label for="cad-email">E-mail</label>
+      <input type="email" id="cad-email" placeholder="seu@email.com">
+
+      <label for="cad-senha">Senha</label>
+      <input type="password" id="cad-senha" placeholder="Minimo 8 caracteres">
+      <p class="dica">A senha deve conter letra maiuscula, minuscula, numero e caractere especial.</p>
+
+      <button class="botao-principal" onclick="cadastrar()">Criar conta</button>
+    </section>
+
+    <p id="mensagem-acesso" class="mensagem oculto"></p>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protótipo ConciliaCard - Sprint #1</title>
+<style>
+:root{--azul:#1d4e89;--borda:#e2e6ef;--suave:#6b7787;--ok:#1b7f4b;--at:#a86b00;--er:#b32d2d;}
+*{box-sizing:border-box}
+body{margin:0;background:#eceff5;font-family:"Segoe UI",Arial,sans-serif;color:#1f2733;font-size:13px}
+.cabecalho{background:var(--azul);color:#fff;padding:26px 32px}
+.cabecalho h1{margin:0 0 4px;font-size:22px}
+.cabecalho p{margin:0;opacity:.85;font-size:13px}
+.galeria{padding:28px;display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start}
+.frame{background:#fff;border:1px solid var(--borda);border-radius:12px;overflow:hidden;box-shadow:0 6px 20px rgba(20,40,80,.09)}
+.frame-titulo{background:#f7f9fc;border-bottom:1px solid var(--borda);padding:9px 14px;font-weight:700;font-size:12px;color:var(--azul)}
+.frame-corpo{padding:18px}
+.tela-login{width:390px}
+.tela-painel{width:760px}
+.marca{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.marca-icone{width:34px;height:34px;border-radius:8px;background:var(--azul);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px}
+.marca strong{font-size:16px;display:block}
+.marca span{font-size:11px;color:var(--suave)}
+.abas{display:flex;gap:7px;margin:14px 0}
+.aba{flex:1;padding:8px;border:1px solid var(--borda);border-radius:7px;text-align:center;font-size:12px}
+.aba.ativa{background:var(--azul);color:#fff;border-color:var(--azul)}
+label{display:block;margin:11px 0 4px;font-weight:600;font-size:12px}
+.campo{border:1px solid var(--borda);border-radius:7px;padding:8px 10px;color:#9aa4b2;background:#fff}
+.campo.preenchido{color:#1f2733}
+.btn{margin-top:15px;padding:9px;border-radius:7px;background:var(--azul);color:#fff;text-align:center;font-weight:600;font-size:13px}
+.btn.sec{background:#fff;color:#1f2733;border:1px solid var(--borda);font-weight:400}
+.dica{font-size:11px;color:var(--suave);margin-top:8px}
+.erro{margin-top:12px;background:#fdecec;color:var(--er);padding:8px 10px;border-radius:7px;font-size:12px}
+.topo{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--borda);padding-bottom:12px;margin-bottom:16px}
+.secao{border:1px solid var(--borda);border-radius:10px;padding:14px;margin-bottom:14px}
+.secao h3{margin:0 0 3px;font-size:14px}
+.secao p.sub{margin:0 0 12px;font-size:11px;color:var(--suave)}
+.form-linha{display:flex;gap:9px;align-items:flex-end;margin-bottom:12px}
+.form-linha>div{flex:1}
+.form-linha .curto{flex:0 0 96px}
+table{width:100%;border-collapse:collapse;font-size:11.5px}
+th,td{border-bottom:1px solid var(--borda);padding:6px 8px;text-align:left}
+th{background:#f7f9fc;font-size:10px;text-transform:uppercase;color:var(--suave)}
+.dir{text-align:right}.ctr{text-align:center}
+.ind{display:flex;gap:9px;margin-bottom:13px;flex-wrap:wrap}
+.ind div{flex:1 1 90px;border:1px solid var(--borda);border-radius:9px;padding:9px;background:#fbfcfe;font-size:10px;color:var(--suave)}
+.ind div b{display:block;font-size:19px;color:#1f2733}
+.ind .vok b{color:var(--ok)}.ind .vat b{color:var(--at)}.ind .ver b{color:var(--er)}.ind .vaz b{color:var(--azul);font-size:15px}
+.tag{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700}
+.tag.ok{background:#e4f4ea;color:var(--ok)}
+.tag.at{background:#fdf1dc;color:var(--at)}
+.tag.er{background:#fdecec;color:var(--er)}
+.tag.nt{background:#eef1f6;color:var(--suave)}
+.legenda{padding:0 28px 34px;max-width:960px}
+.legenda h2{font-size:16px;color:var(--azul)}
+.legenda li{margin-bottom:5px;font-size:12.5px;line-height:1.5}
+.fluxo{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;margin:10px 0 18px}
+.fluxo span{background:#fff;border:1px solid var(--borda);border-radius:20px;padding:5px 12px}
+</style>
+</head>
+<body>
+
+<div class="cabecalho">
+  <h1>Protótipo de Alta Fidelidade &mdash; ConciliaCard</h1>
+  <p>Conciliação de extrato de cartão de crédito &middot; Sprint #1 &middot; FATEC Ipiranga &mdash; Laboratório de Engenharia de Software</p>
+</div>
+
+<div class="legenda">
+  <h2>Fluxo de navegação</h2>
+  <div class="fluxo">
+    <span>Tela 1 &mdash; Login (UC01)</span> &rarr;
+    <span>Tela 2 &mdash; Criar conta (UC01)</span> &rarr;
+    <span>Tela 3 &mdash; Painel: gastos e importação (UC02/UC03)</span> &rarr;
+    <span>Tela 4 &mdash; Resultado da conciliação (UC04)</span>
+  </div>
+</div>
+
+<div class="galeria">
+
+  <!-- TELA 1 -->
+  <div class="frame tela-login">
+    <div class="frame-titulo">TELA 1 &mdash; Acesso / Login (UC01)</div>
+    <div class="frame-corpo">
+      <div class="marca"><div class="marca-icone">&#9636;</div><div><strong>ConciliaCard</strong><span>Conciliação de extrato de cartão</span></div></div>
+      <div class="abas"><div class="aba ativa">Entrar</div><div class="aba">Criar conta</div></div>
+      <label>E-mail</label><div class="campo preenchido">usuario@fatec.sp.gov.br</div>
+      <label>Senha</label><div class="campo preenchido">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+      <div class="btn">Entrar</div>
+      <p class="dica">Usuário de teste: usuario@fatec.sp.gov.br / Senha@2026</p>
+    </div>
+  </div>
+
+  <!-- TELA 2 -->
+  <div class="frame tela-login">
+    <div class="frame-titulo">TELA 2 &mdash; Criar conta + erro de validação (UC01)</div>
+    <div class="frame-corpo">
+      <div class="marca"><div class="marca-icone">&#9636;</div><div><strong>ConciliaCard</strong><span>Conciliação de extrato de cartão</span></div></div>
+      <div class="abas"><div class="aba">Entrar</div><div class="aba ativa">Criar conta</div></div>
+      <label>Nome completo</label><div class="campo preenchido">Aluno de Teste</div>
+      <label>E-mail</label><div class="campo preenchido">aluno@fatec.sp.gov.br</div>
+      <label>Senha</label><div class="campo preenchido">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+      <p class="dica">A senha deve conter maiúscula, minúscula, número e caractere especial.</p>
+      <div class="btn">Criar conta</div>
+      <div class="erro">A senha deve ter no mínimo 8 caracteres, incluindo letra maiúscula, minúscula, número e caractere especial.</div>
+    </div>
+  </div>
+
+  <!-- TELA 3 -->
+  <div class="frame tela-painel">
+    <div class="frame-titulo">TELA 3 &mdash; Painel: lançamentos de gastos e importação do extrato (UC02 / UC03)</div>
+    <div class="frame-corpo">
+      <div class="topo">
+        <div class="marca" style="margin:0"><div class="marca-icone">&#9636;</div><div><strong>ConciliaCard</strong></div></div>
+        <div style="font-size:12px;color:var(--suave)">Usuário de Teste &nbsp;|&nbsp; Sair</div>
+      </div>
+
+      <div class="secao">
+        <h3>1. Lançamentos de gastos</h3>
+        <p class="sub">Cadastre aqui os gastos conforme você os realiza.</p>
+        <div class="form-linha">
+          <div><label>Descrição</label><div class="campo">Ex.: Mercado São Jorge</div></div>
+          <div class="curto"><label>Valor (R$)</label><div class="campo">0,00</div></div>
+          <div class="curto"><label>Data</label><div class="campo">07/09/2026</div></div>
+          <div class="curto"><label>Categoria</label><div class="campo preenchido">Alimentação</div></div>
+          <div class="curto" style="flex:0 0 84px"><div class="btn" style="margin:0">Incluir</div></div>
+          <div class="curto" style="flex:0 0 78px"><div class="btn sec" style="margin:0">Limpar</div></div>
+        </div>
+        <table>
+          <tr><th>ID</th><th>Data</th><th>Descrição</th><th>Categoria</th><th class="dir">Valor</th><th class="ctr">Ações</th></tr>
+          <tr><td>5</td><td>15/09/2026</td><td>Livraria Técnica</td><td>Educação</td><td class="dir">R$ 119,00</td><td class="ctr">Editar &middot; Excluir</td></tr>
+          <tr><td>4</td><td>12/09/2026</td><td>Farmácia Bem Estar</td><td>Saúde</td><td class="dir">R$ 62,80</td><td class="ctr">Editar &middot; Excluir</td></tr>
+          <tr><td>3</td><td>10/09/2026</td><td>Assinatura de streaming</td><td>Lazer</td><td class="dir">R$ 39,90</td><td class="ctr">Editar &middot; Excluir</td></tr>
+          <tr><td>2</td><td>07/09/2026</td><td>Mercado São Jorge</td><td>Alimentação</td><td class="dir">R$ 184,35</td><td class="ctr">Editar &middot; Excluir</td></tr>
+          <tr><td>1</td><td>05/09/2026</td><td>Uber para a faculdade</td><td>Transporte</td><td class="dir">R$ 27,90</td><td class="ctr">Editar &middot; Excluir</td></tr>
+          <tr><td colspan="4"><b>Total cadastrado</b></td><td class="dir"><b>R$ 433,95</b></td><td></td></tr>
+        </table>
+      </div>
+
+      <div class="secao">
+        <h3>2. Importar extrato do cartão (PDF)</h3>
+        <p class="sub">Envie o extrato em PDF. Somente arquivos PDF de até 5 MB.</p>
+        <div class="form-linha">
+          <div><label>Arquivo do extrato</label><div class="campo preenchido">extrato_setembro_2026.pdf</div></div>
+          <div class="curto" style="flex:0 0 150px"><div class="btn" style="margin:0">Importar extrato</div></div>
+        </div>
+        <table>
+          <tr><th>ID</th><th>Arquivo</th><th>Referência</th><th class="ctr">Lançamentos</th><th class="dir">Total</th><th class="ctr">Ação</th></tr>
+          <tr><td>1</td><td>extrato_setembro_2026.pdf</td><td>09/2026</td><td class="ctr">6</td><td class="dir">R$ 550,40</td><td class="ctr">Conciliar</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA 4 -->
+  <div class="frame tela-painel">
+    <div class="frame-titulo">TELA 4 &mdash; Resultado da conciliação (UC04)</div>
+    <div class="frame-corpo">
+      <div class="secao">
+        <h3>3. Resultado da conciliação</h3>
+        <p class="sub">Extrato #1 &mdash; extrato_setembro_2026.pdf (referência 09/2026)</p>
+        <div class="ind">
+          <div class="vok"><b>3</b>Conciliados</div>
+          <div class="vat"><b>1</b>Divergentes</div>
+          <div class="ver"><b>2</b>Não cadastrados</div>
+          <div class="nt"><b>1</b>Não faturados</div>
+          <div class="vaz"><b>50%</b>Conciliação</div>
+          <div class="vaz"><b>R$ 116,45</b>Diferença de totais</div>
+        </div>
+        <table>
+          <tr><th>Situação</th><th>Lançamento do extrato</th><th>Gasto cadastrado</th><th class="dir">Valor extrato</th><th class="dir">Valor sistema</th><th class="dir">Diferença</th></tr>
+          <tr><td><span class="tag ok">Conciliado</span></td><td>05/09 UBER TRIP SAO PAULO</td><td>05/09 Uber para a faculdade</td><td class="dir">R$ 27,90</td><td class="dir">R$ 27,90</td><td class="dir">&mdash;</td></tr>
+          <tr><td><span class="tag ok">Conciliado</span></td><td>07/09 MERCADO SAO JORGE</td><td>07/09 Mercado São Jorge</td><td class="dir">R$ 184,35</td><td class="dir">R$ 184,35</td><td class="dir">&mdash;</td></tr>
+          <tr><td><span class="tag ok">Conciliado</span></td><td>12/09 FARMACIA BEM ESTAR</td><td>12/09 Farmácia Bem Estar</td><td class="dir">R$ 62,80</td><td class="dir">R$ 62,80</td><td class="dir">&mdash;</td></tr>
+          <tr><td><span class="tag at">Valor divergente</span></td><td>10/09 STREAMING ASSINATURA MENSAL</td><td>10/09 Assinatura de streaming</td><td class="dir">R$ 49,90</td><td class="dir">R$ 39,90</td><td class="dir">R$ 10,00</td></tr>
+          <tr><td><span class="tag er">Não cadastrado</span></td><td>18/09 PADARIA CENTRAL</td><td>&mdash;</td><td class="dir">R$ 15,00</td><td class="dir">&mdash;</td><td class="dir">&mdash;</td></tr>
+          <tr><td><span class="tag er">Não cadastrado</span></td><td>19/09 POSTO IPIRANGA COMBUSTIVEL</td><td>&mdash;</td><td class="dir">R$ 210,45</td><td class="dir">&mdash;</td><td class="dir">&mdash;</td></tr>
+          <tr><td><span class="tag nt">Não faturado</span></td><td>&mdash;</td><td>15/09 Livraria Técnica</td><td class="dir">&mdash;</td><td class="dir">R$ 119,00</td><td class="dir">&mdash;</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="legenda">
+  <h2>Como transformar este protótipo no arquivo do Figma</h2>
+  <ol>
+    <li>Abra este arquivo no Chrome e tire um print de cada um dos 4 quadros (Tela 1 a Tela 4).</li>
+    <li>No Figma, crie um arquivo chamado <b>ConciliaCard &mdash; Sprint 1</b> e um <i>frame</i> por tela (Desktop 1440 x 1024).</li>
+    <li>Cole o print como referência de fundo e redesenhe os elementos com os componentes do Figma
+        (retângulos, textos, <i>auto layout</i>). Paleta: azul <b>#1D4E89</b>, fundo <b>#F4F6FA</b>,
+        borda <b>#E2E6EF</b>, verde <b>#1B7F4B</b>, amarelo <b>#A86B00</b>, vermelho <b>#B32D2D</b>. Fonte: Inter ou Arial.</li>
+    <li>Use o <b>Prototype</b> do Figma para ligar: Tela 1 &rarr; Tela 3 (botão Entrar), Tela 1 &rarr; Tela 2 (aba Criar conta),
+        Tela 3 &rarr; Tela 4 (botão Conciliar).</li>
+    <li>Publique com <b>Share &rarr; Anyone with the link &rarr; can view</b> e entregue o link no Teams.</li>
+  </ol>
+</div>
+
+</body>
+</html>

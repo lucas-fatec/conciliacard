@@ -1,0 +1,28 @@
+{
+  "name": "conciliacard-backend",
+  "version": "1.0.0",
+  "description": "API de conciliacao de extrato de cartao de credito - Sprint #1",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest --verbose"
+  },
+  "keywords": [
+    "fatec",
+    "engenharia-de-software",
+    "conciliacao"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.0",
+    "pdfjs-dist": "2.16.105"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
