@@ -12,7 +12,7 @@ Lucas dos Santos Rodrigues — RA 2040482313003 — turno: Noturno. Participaç�
 
 GitHub: https://github.com/lucas-fatec/conciliacard
 
-Vídeo: [inserir link após gravação]. Figma: não disponível; protótipo HTML em `prototipo/`.
+Figma: não disponível; protótipo HTML em `prototipo/`.
 
 ## O que o sistema faz
 
