@@ -18,14 +18,6 @@ cartão em PDF. O sistema compara os dois lados e classifica cada linha:
 | **Não cadastrado** | Está no extrato, mas o usuário não registrou |
 | **Não faturado** | O usuário registrou, mas ainda não foi cobrado |
 
-## Casos de uso entregues na Sprint #1
-
-| Código | Caso de Uso | Endpoints |
-|---|---|---|
-| UC01 | Autenticação de Usuário | `POST /api/auth/cadastro`, `POST /api/auth/login` |
-| UC02 | Manter Lançamentos de Gastos | `GET/POST/PUT/DELETE /api/gastos` |
-| UC03 | Importar Extrato do Cartão (PDF) | `POST /api/extratos`, `GET /api/extratos` |
-| UC04 | Conciliar Extrato | `GET /api/conciliacao/:extratoId` |
 
 ## Arquitetura
 
